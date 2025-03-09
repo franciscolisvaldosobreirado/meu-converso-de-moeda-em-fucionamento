@@ -1,143 +1,55 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conversor de Moedas</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f0f0f0;
-        }
-
-        .container {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            width: 300px;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-            color: #333;
-        }
-
-        select, input {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            margin-bottom: 10px;
-        }
-
-        button {
-            width: 100%;
-            padding: 10px;
-            background-color: #6c63ff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .resultado {
-            margin-top: 20px;
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            text-align: center;
-        }
-
-        .bandeira {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            margin: 5px auto;
-        }
-
-        .seta {
-            color: #6c63ff;
-            font-size: 24px;
-            margin: 10px 0;
-        }
-    </style>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>DevClub - Conversor de Moedas</title>
+   <link rel="stylesheet" href="style.css">
+   <script src="./scripts.js" defer></script>
 </head>
+
 <body>
-    <div class="container">
-        <div class="form-group">
-            <label>Converter de</label>
-            <select id="moedaOrigem">
-                <option value="BRL">R$ Real Brasileiro</option>
-                <option value="USD">US$ Dólar Americano</option>
-                <option value="EUR">€ Euro</option>
-            </select>
-        </div>
+   <main>
+    <link rel="stylesheet" href="style.css">
+      <img class="logo" src="logo.gif" alt="Logo DevClub - Conversor de Moedas">
 
-        <div class="form-group">
-            <label>Converter para</label>
-            <select id="moedaDestino">
-                <option value="USD">US$ Dólar Americano</option>
-                <option value="BRL">R$ Real Brasileiro</option>
-                <option value="EUR">€ Euro</option>
-            </select>
-        </div>
+      <label>
+         Converter <b>de</b>
+         <select id="from-currency">
+            <option value="BRL">R$ Real Brasileiro</option>
+         </select>
+      </label>
 
-        <div class="form-group">
-            <label>Valor</label>
-            <input type="number" id="valor" placeholder="Digite o valor">
-        </div>
+      <label>
+         Converter <b>para</b>
+         <select id="to-currency">
+            <option value="USD">US$ Dólar Americano</option>
+            <option value="EUR">€ Euro</option>
+         </select>
+      </label>
 
-        <button onclick="converter()">Converter</button>
+      <label>
+         Valor
+         <input type="text" id="amount" placeholder="R$ 10.000,00">
+      </label>
 
-        <div class="resultado">
-            <img src="https://flagcdn.com/br.svg" alt="Bandeira Brasil" class="bandeira">
-            <p>Real</p>
-            <p id="valorOrigem">R$ 0,00</p>
-            
-            <div class="seta">↓</div>
-            
-            <img src="https://flagcdn.com/us.svg" alt="Bandeira EUA" class="bandeira">
-            <p>Dólar</p>
-            <p id="valorDestino">US$ 0,00</p>
-        </div>
-    </div>
+      <button id="convert-button">Converter</button>
 
-    <script>
-        function converter() {
-            const valor = document.getElementById('valor').value;
-            const moedaOrigem = document.getElementById('moedaOrigem').value;
-            const moedaDestino = document.getElementById('moedaDestino').value;
-            
-            // Aqui você pode adicionar a lógica de conversão real
-            // Por enquanto, vamos usar uma taxa fixa para exemplo
-            const taxas = {
-                'BRL-USD': 0.2, // 1 BRL = 0.2 USD
-                'USD-BRL': 5.0, // 1 USD = 5.0 BRL
-                'EUR-BRL': 6.0, // 1 EUR = 6.0 BRL
-                'BRL-EUR': 0.17, // 1 BRL = 0.17 EUR
-                'EUR-USD': 1.2, // 1 EUR = 1.2 USD
-                'USD-EUR': 0.83 // 1 USD = 0.83 EUR
-            };
-
-            const taxa = taxas[`${moedaOrigem}-${moedaDestino}`];
-            const resultado = valor * taxa;
-
-            document.getElementById('valorOrigem').textContent = 
-                `${moedaOrigem === 'BRL' ? 'R$' : moedaOrigem === 'USD' ? 'US$' : '€'} ${valor}`;
-            document.getElementById('valorDestino').textContent = 
-                `${moedaDestino === 'BRL' ? 'R$' : moedaDestino === 'USD' ? 'US$' : '€'} ${resultado.toFixed(2)}`;
-        }
-    </script>
+      <section>
+         <div class="currency-box">
+            <img src="brasil2.png" alt="Bandeira do Brasil">
+            <p class="currency">Real</p>
+            <p id="from-value" class="currency-value">R$ 0,00</p>
+         </div>
+         <img src="Vector.png" alt="Seta">
+         <div class="currency-box">
+            <img src="estados-unidos1.png" alt="Bandeira dos EUA">
+            <p class="currency">Dólar</p>
+            <p id="to-value" class="currency-value">US$ 0,00</p>
+         </div>
+      </section>
+   </main>
 </body>
+
 </html>
